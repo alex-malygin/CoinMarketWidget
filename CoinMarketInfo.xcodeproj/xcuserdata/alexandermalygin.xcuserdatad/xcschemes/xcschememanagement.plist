@@ -7,7 +7,7 @@
 		<key>CoinMarketInfo.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 		<key>CoinMarketWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -17,7 +17,20 @@
 		<key>CoinWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>F279937B25E2B56300199E31</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2EAA37B25E2AD7B00BAE829</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -2,10 +2,15 @@
 //  CoinModel.swift
 //  CoinMarketInfo
 //
-//  Created by Eugene Shapovalov on 21.02.2021.
+//  Created by Eugene Shapovalov on 05.03.2021.
 //
 
 import Foundation
+
+enum CoinState: String {
+    case up
+    case down
+}
 
 // MARK: - CoinData
 struct CoinData: Codable {

@@ -10,19 +10,25 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry.getCoin()
+        SimpleEntry(date: Date(), coins: [
+                        CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                        CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                        CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry.getCoin()
+        let entry = SimpleEntry(date: Date(), coins: [
+                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")])
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
         
-        CoinProvider.getCoinList { (coins, error) in
+        CoinProvider.getCoinList { (coin, error) in
             let date = Date()
-            let coins = coins?.data.map({CoinViewModel(model: $0)}) ?? []
+            let coins = coin?.data.map({CoinViewModel(model: $0)}) ?? []
             let entry = SimpleEntry(date: date, coins: coins)
             let refreshDate = Calendar.current.date(byAdding: .minute, value: 60, to: date)
             let timeline = Timeline(entries: [entry], policy: .after(refreshDate ?? Date()))
@@ -35,21 +41,24 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     var coins: [CoinViewModel]
-    
-    static func getCoin() -> SimpleEntry  {
-        var coin = [CoinViewModel]()
-        CoinProvider.getCoinList { (coins, error) in
-            coin = coins?.data.map({CoinViewModel(model: $0)}) ?? []
-        }
-        return SimpleEntry(date: Date(), coins: coin)
-    }
 }
 
 struct CoinWidgetEntryView : View {
     var entry: SimpleEntry
 
+    @Environment(\.widgetFamily) var family
+    @ViewBuilder
     var body: some View {
-        CoinWidgetSmall(coins: entry.coins)
+        switch family {
+            case .systemSmall:
+                CoinWidgetSmall(coins: entry.coins)
+            case .systemMedium:
+                CoinWidgetMedium(coins: entry.coins)
+            case .systemLarge:
+                CoinWidgetLarge(coins: entry.coins)
+            default:
+                CoinWidgetSmall(coins: entry.coins)
+        }
     }
 }
 
@@ -69,7 +78,19 @@ struct CoinWidget: Widget {
 
 struct CoinWidget_Previews: PreviewProvider {
     static var previews: some View {
-        CoinWidgetEntryView(entry: SimpleEntry.getCoin())
+        Group {
+            CoinWidgetEntryView(entry: SimpleEntry(date: Date(), coins: [
+                                                                CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                                                                CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                                                                CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")]))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+        
+            CoinWidgetEntryView(entry: SimpleEntry(date: Date(), coins: [
+                                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
+                                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")]))
+            .redacted(reason: .placeholder)
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        }
     }
 }
