@@ -7,29 +7,30 @@
 
 import Foundation
 
-enum CoinState: String {
-    case up
+enum CoinState: Int {
     case down
+    case up
 }
 
 struct CoinViewModel: Hashable {
     var id = UUID()
     var coinName: String
-    var coinPrice: String
+    var coinPrice: Double
     var coinSymbol: String
     var state: CoinState
+
     
-    init(model: Datum) {
-        coinName = model.name
-        coinPrice = "$\(model.quote.usd.price.formattedWithSeparator)"
-        coinSymbol = model.symbol
-        state = model.quote.usd.percentChange1H > 0 ? .up : .down
+    init(model: MyCoinList) {
+        coinName = model.name ?? ""
+        coinPrice = model.price
+        coinSymbol = model.symbol ?? ""
+        state = model.state > 0 ? .up : .down
         
     }
-    
+
     init(coinName: String, coinPrice: String, coinSymbol: String) {
         self.coinName = coinName
-        self.coinPrice = coinPrice
+        self.coinPrice = Double(coinPrice) ?? 0.0
         self.coinSymbol = coinSymbol
         self.state = .up
     }

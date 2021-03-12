@@ -22,6 +22,7 @@ class AllCoinViewController: UIViewController {
     var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class AllCoinViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "CoinTableViewCell", bundle: nil), forCellReuseIdentifier: coinCell)
@@ -55,6 +58,13 @@ class AllCoinViewController: UIViewController {
         
         tableView.reloadData()
     }
+    
+    @objc private func refreshWeatherData(_ sender: Any) {
+        viewModel.getAllCurrency()
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
 }
 
 extension AllCoinViewController: UITableViewDataSource {

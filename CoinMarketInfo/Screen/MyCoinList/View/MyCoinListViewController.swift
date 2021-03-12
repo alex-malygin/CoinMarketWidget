@@ -17,8 +17,12 @@ class MyCoinListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.observCoinData()
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.observCoinData()
     }
     
     private func setupTableView() {

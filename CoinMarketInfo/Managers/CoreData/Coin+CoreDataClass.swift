@@ -2,7 +2,7 @@
 //  Coin+CoreDataClass.swift
 //  CoinMarketInfo
 //
-//  Created by Eugene Shapovalov on 09.03.2021.
+//  Created by Eugene Shapovalov on 11.03.2021.
 //
 //
 

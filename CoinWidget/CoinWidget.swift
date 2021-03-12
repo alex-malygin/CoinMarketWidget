@@ -7,33 +7,48 @@
 
 import WidgetKit
 import SwiftUI
+import CoreData
 
 struct Provider: TimelineProvider {
+    
+    var moc = CoreDataStack.shared.managedObjectContext
+    
+    init(context : NSManagedObjectContext) {
+        self.moc = context
+    }
+    
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), coins: [
-                        CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                        CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                        CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")])
+                        CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
+                        CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
+                        CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC")])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let entry = SimpleEntry(date: Date(), coins: [
-                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")])
+                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
+                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
+                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC")])
         completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
-        
-        CoinProvider.getCoinList { (coin, error) in
-            let date = Date()
-            let coins = coin?.data.map({CoinViewModel(model: $0)}) ?? []
-            let entry = SimpleEntry(date: date, coins: coins)
-            let refreshDate = Calendar.current.date(byAdding: .minute, value: 60, to: date)
+     
+        let request = NSFetchRequest<MyCoinList>(entityName: "MyCoinList")
+        let date = Date()
+
+        guard let result = try? moc.fetch(request) else {
+            let entry = SimpleEntry(date: date, coins: [])
+            let refreshDate = Calendar.current.date(byAdding: .minute, value: 10, to: date)
             let timeline = Timeline(entries: [entry], policy: .after(refreshDate ?? Date()))
             completion(timeline)
+            return
         }
+        let coins = result.map { CoinViewModel(model: $0)}
+        let entry = SimpleEntry(date: date, coins: coins)
+        let refreshDate = Calendar.current.date(byAdding: .minute, value: 10, to: date)
+        let timeline = Timeline(entries: [entry], policy: .after(refreshDate ?? Date()))
+        completion(timeline)
 
     }
 }
@@ -49,6 +64,7 @@ struct CoinWidgetEntryView : View {
     @Environment(\.widgetFamily) var family
     @ViewBuilder
     var body: some View {
+        
         switch family {
             case .systemSmall:
                 CoinWidgetSmall(coins: entry.coins)
@@ -67,7 +83,7 @@ struct CoinWidget: Widget {
     let kind: String = "CoinWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider(context: CoreDataStack.shared.managedObjectContext)) { entry in
             CoinWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("CoinMarketInfo")
@@ -78,19 +94,10 @@ struct CoinWidget: Widget {
 
 struct CoinWidget_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
             CoinWidgetEntryView(entry: SimpleEntry(date: Date(), coins: [
-                                                                CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                                                                CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                                                                CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")]))
+                                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
+                                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
+                                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC")]))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-        
-            CoinWidgetEntryView(entry: SimpleEntry(date: Date(), coins: [
-                                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "..."),
-                                                    CoinViewModel(coinName: "...", coinPrice: "...", coinSymbol: "...")]))
-            .redacted(reason: .placeholder)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-        }
     }
 }

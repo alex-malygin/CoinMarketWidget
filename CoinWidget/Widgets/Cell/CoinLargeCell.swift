@@ -16,6 +16,7 @@ struct CoinLargeCell: View {
         self.coins = coins
     }
     
+    @ViewBuilder
     var body: some View {
         VStack {
             HStack(alignment: .center) {
@@ -30,18 +31,24 @@ struct CoinLargeCell: View {
                 }
                 Spacer()
                 
-                switch coins.state {
-                    case .up:
-                        Text(coins.coinPrice)
-                            .font(.system(size: 12))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.green)
-                    case .down:
-                        Text(coins.coinPrice)
+                
+                switch coins.state.rawValue {
+                    case 0:
+                        Text("$\(coins.coinPrice.formattedWithSeparator)")
                             .font(.system(size: 12))
                             .fontWeight(.bold)
                             .foregroundColor(Color.red)
-                        
+                    case 1:
+                        Text("$\(coins.coinPrice.formattedWithSeparator)")
+                            .font(.system(size: 12))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.green)
+                    
+                    default:
+                        Text("$\(coins.coinPrice.formattedWithSeparator)")
+                            .font(.system(size: 12))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.black)
                 }
                 
             }

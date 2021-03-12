@@ -16,7 +16,7 @@ class CoinProvider {
         "Accept": "application/json"
     ]
         AF.request("https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest", method: .get, headers: headers).responseJSON { response in
-            debugPrint(response)
+//            debugPrint(response)
             
             if let error = response.error {
                 completion(nil, error)
@@ -24,7 +24,7 @@ class CoinProvider {
             
             if let data = response.data {
                 let decodeData = try? JSONDecoder().decode(CoinData.self, from: data)
-                completion(decodeData, nil)
+//                completion(decodeData, nil)
             }
         }
     }

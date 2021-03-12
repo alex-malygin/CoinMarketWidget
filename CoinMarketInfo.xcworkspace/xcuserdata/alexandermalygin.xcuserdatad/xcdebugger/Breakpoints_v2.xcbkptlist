@@ -3,4 +3,54 @@
    uuid = "C4568691-7FD3-401E-84AE-EFF8BF94D847"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "57122A0B-D99E-4BA7-B6CE-9CBA02B01CB5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoinMarketInfo/Screen/AllCoinsList/ViewModel/AllCoinListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "observCoinData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "57122A0B-D99E-4BA7-B6CE-9CBA02B01CB5 - e26e8020a7604495"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Array&lt;CoinMarketInfo.Coin&gt;) -&gt; () in CoinMarketInfo.AllCoinListViewModel.observCoinData() -&gt; ()"
+                  moduleName = "CoinMarketInfo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexandermalygin/Documents/Work/Swift%20Project/CoinMarketInfo/CoinMarketInfo/Screen/AllCoinsList/ViewModel/AllCoinListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "53">
+               </Location>
+               <Location
+                  uuid = "57122A0B-D99E-4BA7-B6CE-9CBA02B01CB5 - 835c52ff9a22a584"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (CoinMarketInfo.Coin) -&gt; CoinMarketInfo.CoinViewModel in closure #3 (Swift.Array&lt;CoinMarketInfo.Coin&gt;) -&gt; () in CoinMarketInfo.AllCoinListViewModel.observCoinData() -&gt; ()"
+                  moduleName = "CoinMarketInfo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexandermalygin/Documents/Work/Swift%20Project/CoinMarketInfo/CoinMarketInfo/Screen/AllCoinsList/ViewModel/AllCoinListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
