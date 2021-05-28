@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA655D7824ED4C58A5D0D1C4 /* Pods_CoinMarketInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F31BBC0853F3AF9BC8E895C /* Pods_CoinMarketInfo.framework */; };
 		D6C230387E8B3CD2BF3A9DE8 /* Pods_CoinWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17129E91D752AB10F545AF09 /* Pods_CoinWidgetExtension.framework */; };
-		F2077B9425FB709E003922AB /* CoreDataStac.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2077B9325FB709E003922AB /* CoreDataStac.swift */; };
+		F2077B9425FB709E003922AB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2077B9325FB709E003922AB /* CoreDataStack.swift */; };
 		F2254D2125F8B490008D7759 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2254D2025F8B490008D7759 /* Constant.swift */; };
 		F230B94B25F2B623008D8739 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F230B94A25F2B623008D8739 /* CoinModel.swift */; };
 		F249503925FAB5DE00A93FAF /* Coin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F249503525FAB5DE00A93FAF /* Coin+CoreDataClass.swift */; };
@@ -84,7 +84,7 @@
 		4F31BBC0853F3AF9BC8E895C /* Pods_CoinMarketInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoinMarketInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CC40DC4E5EFFB2FC61029E2 /* Pods-CoinMarketInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinMarketInfo.debug.xcconfig"; path = "Target Support Files/Pods-CoinMarketInfo/Pods-CoinMarketInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		B0F27843817BC87D665E86CF /* Pods-CoinMarketInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoinMarketInfo.release.xcconfig"; path = "Target Support Files/Pods-CoinMarketInfo/Pods-CoinMarketInfo.release.xcconfig"; sourceTree = "<group>"; };
-		F2077B9325FB709E003922AB /* CoreDataStac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStac.swift; sourceTree = "<group>"; };
+		F2077B9325FB709E003922AB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F2254D2025F8B490008D7759 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F230B94A25F2B623008D8739 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
 		F249503525FAB5DE00A93FAF /* Coin+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coin+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 				F279938425E2B56500199E31 /* Info.plist */,
 				F2EAA39425E2ADF300BAE829 /* CoinModel.swift */,
 				F2C2FD5625E2B885001EF546 /* CoinViewModel.swift */,
-				F2077B9325FB709E003922AB /* CoreDataStac.swift */,
+				F2077B9325FB709E003922AB /* CoreDataStack.swift */,
 			);
 			path = CoinWidget;
 			sourceTree = "<group>";
@@ -556,7 +556,7 @@
 				F281271625EB9D2B00274BB7 /* CoinWidgetLarge.swift in Sources */,
 				F2C2FD5F25E2C751001EF546 /* CoinWidgetSmall.swift in Sources */,
 				F249504025FAB5DE00A93FAF /* MyCoinList+CoreDataProperties.swift in Sources */,
-				F2077B9425FB709E003922AB /* CoreDataStac.swift in Sources */,
+				F2077B9425FB709E003922AB /* CoreDataStack.swift in Sources */,
 				F2C2FD5725E2B885001EF546 /* CoinViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -788,12 +788,14 @@
 			baseConfigurationReference = 7CC40DC4E5EFFB2FC61029E2 /* Pods-CoinMarketInfo.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CoinMarketInfo/CoinMarketInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ACK684Q2U7;
 				INFOPLIST_FILE = CoinMarketInfo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -810,12 +812,14 @@
 			baseConfigurationReference = B0F27843817BC87D665E86CF /* Pods-CoinMarketInfo.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CoinMarketInfo/CoinMarketInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ACK684Q2U7;
 				INFOPLIST_FILE = CoinMarketInfo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

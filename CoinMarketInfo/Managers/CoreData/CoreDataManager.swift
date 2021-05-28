@@ -133,6 +133,7 @@ extension CoreDataManager {
         return true
     }
     
+    @available(iOSApplicationExtension 14.0, *)
     func updateMyCoinList(coin: Datum) {
         
         let fetchRequest = NSFetchRequest<MyCoinList>(entityName: "MyCoinList")

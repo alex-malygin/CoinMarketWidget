@@ -18,17 +18,11 @@ struct Provider: TimelineProvider {
     }
     
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), coins: [
-                        CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
-                        CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
-                        CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC")])
+        SimpleEntry(date: Date(), coins: [])
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), coins: [
-                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
-                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
-                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC")])
+        let entry = SimpleEntry(date: Date(), coins: [])
         completion(entry)
     }
 
@@ -94,10 +88,7 @@ struct CoinWidget: Widget {
 
 struct CoinWidget_Previews: PreviewProvider {
     static var previews: some View {
-            CoinWidgetEntryView(entry: SimpleEntry(date: Date(), coins: [
-                                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
-                                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC"),
-                                                    CoinViewModel(coinName: "Bitcoin", coinPrice: "$45 000.0", coinSymbol: "BTC")]))
+            CoinWidgetEntryView(entry: SimpleEntry(date: Date(), coins: []))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

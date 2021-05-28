@@ -1,5 +1,5 @@
 //
-//  CoreDataStac.swift
+//  CoreDataStack.swift
 //  CoinWidgetExtension
 //
 //  Created by Eugene Shapovalov on 12.03.2021.

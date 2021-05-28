@@ -26,9 +26,13 @@ class AllCoinViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.observCoinData()
         setupTableView()
         setupSearchBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getAllCurrency()
     }
     
     private func setupTableView() {
@@ -48,6 +52,16 @@ class AllCoinViewController: UIViewController {
         searchController.searchBar.placeholder = "Search"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+    }
+    
+    func registerForNotifications() {
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name("com.andyibanez.newPokemonFetched"),
+            object: nil,
+            queue: nil) { (notification) in
+            print("notification received")
+           
+        }
     }
     
     func filterContentForSearchText(_ searchText: String,

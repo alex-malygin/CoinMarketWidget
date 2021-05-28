@@ -33,15 +33,18 @@ final class AllCoinListViewModel {
                 self?.dataSource.send(coins.map({CoinViewModel(model: $0)}))
             })
             .store(in: &self.subscriptions)
-        
-        getAllCurrency()
     }
     
     func getAllCurrency() {
-        Networking.getCoinList { (coins, error) in
+        Networking.getCoinList { [weak self] (coins, error) in
             guard let coins = coins else { return }
-            coins.data.forEach {CoreDataManager.shared.updateMyCoinList(coin: $0)}
+            coins.data.forEach {if #available(iOSApplicationExtension 14.0, *) {
+                CoreDataManager.shared.updateMyCoinList(coin: $0)
+            } else {
+                // Fallback on earlier versions
+            }}
             CoreDataManager.shared.saveCoins(coins)
+            self?.observCoinData()
         }
     }
     
